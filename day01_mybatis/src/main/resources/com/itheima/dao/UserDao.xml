@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.UserDao">
+    <!--配置查询所有-->
+    <select id="findAll" resultType="User">
+        select * from user
+    </select>
+
+    <!-- 添加用户-->
+    <insert id="insertUser" parameterType="com.itheima.domain.User">
+        INSERT INTO USER(username,birthday,sex,address)VALUES(#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <!-- 根据id删除用户-->
+    <delete id="deleteUserById" parameterType="Integer">
+        DELETE FROM USER WHERE id=#{id}
+    </delete>
+
+    <!-- 修改用户信息-->
+    <update id="updateUser" parameterType="com.itheima.domain.User">
+        UPDATE USER SET username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} WHERE id=#{id}
+    </update>
+
+    <!--根据输入的参数进行模糊查询-->
+    <select id="findByName" parameterType="String" resultType="com.itheima.domain.User">
+        SELECT * FROM USER WHERE username LIKE #{name}
+    </select>
+</mapper>
